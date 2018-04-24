@@ -1,0 +1,58 @@
+#Sección B Ejercicio 3
+
+
+def Neighborhood(archive,v):
+    Stack = []
+    for i in archive:
+        try:
+            if i.index(v)==0:
+                Stack.append(i[1])
+            else:
+                Stack.append(i[0])
+        except:
+            continue
+    return Stack
+ 
+ 
+def DFS(archive,v):
+    
+    Stack = []
+    visited = []
+    Neighbor = []
+    Stack.append(v)
+    
+    
+    print("\nEl primer elemento en la pila es: ",Stack)
+    j = 1
+ 
+    while Stack:
+ 
+ 
+        print("\n\tIteracion: ",j)
+        j+=1
+        print("Pila",Stack)
+        actual = Stack.pop()
+        visited.append(actual)
+        print("Aplicamos pop al elemento <",actual,"> de la pila")
+        print("Pila",Stack)
+        Neighbor = Neighborhood(archive,actual)
+        Neighbor.sort(reverse = True)
+        print("Los vecinos de <",actual,"> son: ",Neighbor)
+        print("Orden de elementos hasta ahora: ",visited)
+        for actual in Neighbor:
+            if actual in Stack and actual in Neighbor:
+                Stack.remove(actual)
+                print("El elemento <",actual,"> ya se repitio.")
+            if actual not in visited:
+                Stack.append(actual)  
+        print("Pila",Stack)
+ 
+    print("Recorrido: ",visited)
+
+
+        
+archive = open ('D:/Users/edaII01alu13/grafo.txt', 'r')
+reading = archive.readlines()
+DFS(reading,"a")	
+archive.close()
+
